@@ -22,6 +22,7 @@ var config = {
             }
         }
     }
+    
 };
 
 // create a new game, pass the configuration
@@ -62,11 +63,15 @@ gameScene.preload = function () {
     this.load.image('platform', 'assets/cloud-platform.png');
     this.load.image('sulty', 'assets/ulty.png');
     this.load.image('menuBg', 'assets/background/menuBG.png');
-    this.load.image('gameOverBg', 'assets/background/gameOver.png')
+    this.load.image('gameOverBg', 'assets/background/gameOver.png');
+    this.load.audio('jump', 'assets/audio/Jump.mp3');
+    
 };
 
 //Create function runs once on start or restart
 gameScene.create = function () {
+    console.log(game);
+    game.canvas.id="myGame";
     //Camera Settings
     this.cameras.main.setViewport(0, 0, 1280, 720);
     //this.cameras.main.setBounds(0, 0, 2920, 2080);
@@ -263,6 +268,7 @@ gameScene.create = function () {
     this.startText.setInteractive();
     this.startText.on('pointerup', function () {
         closeMenu = true;
+        
     });
 
     // 08 : reset camera effects. Not sure if this is needed
