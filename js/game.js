@@ -273,6 +273,19 @@ gameScene.create = function () {
         closeMenu = true;
         
     });
+    
+    this.muteText = this.add.text(game.config.width / 2 - 270, game.config.height / 2+80, '> Mute', {
+        font: '55px Arial',
+        fill: '#fff'
+    }).setScrollFactor(0);
+    this.muteText.setOrigin(0.5);
+    this.muteText.setInteractive();
+    this.muteText.on('pointerup', function () {
+        if(!isMuted){isMuted = true;}else{isMuted=false;}
+    });
+    
+    
+    
 
     // 08 : reset camera effects. Not sure if this is needed
     this.cameras.main.resetFX();
@@ -287,18 +300,26 @@ gameScene.update = function () {
         return;
     }
     if (closeMenu) {
-        
         this.startText.visible = false;
+        this.muteText.visible = false;
         menuBG.visible = false;
     }
     if (openMenu) {
         openMenu = false;
         closeMenu=false;
         this.startText.visible = true;
+        this.muteText.visible = true;
         menuBG.visible = true;
         this.scene.restart();
         return;
     }
+    if(isMuted){
+        this.muteText.setText('> Muted');
+    }else{
+        this.muteText.setText('> Mute');
+    }
+    
+    
     //this.
     //    this.restartText.on('pointerdown', function (pointer) {
     //        console.log("Restart2");
