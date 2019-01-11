@@ -42,6 +42,7 @@ var restartText;
 var finalScore = 0;
 var closeMenu;
 var openMenu;
+var isMuted=false;
 
 
 //Load Assets:
@@ -64,7 +65,7 @@ gameScene.preload = function () {
     this.load.image('sulty', 'assets/ulty.png');
     this.load.image('menuBg', 'assets/background/menuBG.png');
     this.load.image('gameOverBg', 'assets/background/gameOver.png');
-    this.load.audio('jump', 'assets/audio/Jump.mp3');
+    this.load.audio('jump', 'assets/Sound/Jump.mp3');
     
 };
 
@@ -72,6 +73,7 @@ gameScene.preload = function () {
 gameScene.create = function () {
     console.log(game);
     game.canvas.id="myGame";
+    finalScore = 0;
     //Camera Settings
     this.cameras.main.setViewport(0, 0, 1280, 720);
     //this.cameras.main.setBounds(0, 0, 2920, 2080);
@@ -217,7 +219,8 @@ gameScene.create = function () {
         fontSize: '32px Arial',
         fill: '#fff'
     }).setScrollFactor(0);
-
+    
+    jumpSound= this.sound.add('jump');
 
     gameOverBg = this.add.image(0, 0, 'gameOverBg');
     //Sets the gradient to follow the camera
@@ -353,7 +356,9 @@ gameScene.update = function () {
         this.player.anims.play('jump');
         //Jump
         this.player.setVelocityY(-550);
-
+        if(!isMuted){
+        jumpSound.play();
+    }
     }
     if (!isPressed && !upIsPressed) {
         this.player.anims.play('default');
