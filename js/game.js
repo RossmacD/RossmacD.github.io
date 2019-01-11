@@ -65,8 +65,8 @@ gameScene.preload = function () {
     this.load.image('sulty', 'assets/ulty.png');
     this.load.image('menuBg', 'assets/background/menuBG.png');
     this.load.image('gameOverBg', 'assets/background/gameOver.png');
+    this.load.image('helpImage', 'assets/helpimage.png');
     this.load.audio('jump', 'assets/Sound/Jump.mp3');
-    
 };
 
 //Create function runs once on start or restart
@@ -282,6 +282,15 @@ gameScene.create = function () {
     this.muteText.setInteractive();
     this.muteText.on('pointerup', function () {
         if(!isMuted){isMuted = true;}else{isMuted=false;}
+    });
+    this.helpText = this.add.text(game.config.width / 2 - 270, game.config.height / 2+160, '> Help', {
+        font: '55px Arial',
+        fill: '#fff'
+    }).setScrollFactor(0);
+    this.helpText.setOrigin(0.5);
+    this.helpText.setInteractive();
+    this.helpText.on('pointerup', function () {
+        
     });
     
     
